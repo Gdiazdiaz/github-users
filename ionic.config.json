@@ -1,0 +1,8 @@
+{
+  "name": "githubUsers",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "1ae80b0d"
+}
