@@ -29,6 +29,8 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
+        applicationId "com.example.myapp"
+        namespace "http://schemas.android.com/apk/res-auto"
         minSdkVersion 26
     }
 }
