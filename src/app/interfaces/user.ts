@@ -19,7 +19,7 @@ export interface User {
     site_admin: boolean;
   }
   
-  export interface UserByID extends User {
+  export interface UserByUsername extends User {
     name: string;
     company: string;
     blog: string;
@@ -36,3 +36,10 @@ export interface User {
     updated_at: string;
   }
   
+
+  export interface UserState {
+    users: User[],
+    user: User | null,
+    loading: boolean,
+    error: string | null,
+  };

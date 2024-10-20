@@ -9,3 +9,9 @@ export interface SearchResult {
 export interface SearchItem extends User {
   score: number;
 }
+
+export interface SearchState {
+  result: SearchResult,
+  loading: boolean,
+  error: string | null,
+};
