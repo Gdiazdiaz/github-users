@@ -24,7 +24,6 @@ export class UserEffects {
             const users = response.body || [];
             const linkHeader = response.headers.get('Link');
             const nextSince = this.getNextSince(linkHeader);
-            console.log(nextSince, 'since')
             return UserActions.loadUsersSuccess({ users, since: nextSince.toString() });
           }),
           catchError(error => of(UserActions.loadUsersFailure({ error: error.message })))

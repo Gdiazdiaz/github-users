@@ -19,9 +19,6 @@ export class UsersPage implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(UserAction.loadUsers({ per_page: 100, since: '1' }));
-    this.since$.subscribe(sinceValue => {
-      console.log('Since value:', sinceValue);
-    });
     this.loading$.subscribe(loading => {
       this.isLoading = loading;
     })
@@ -45,7 +42,7 @@ export class UsersPage implements OnInit {
   }
 
   onRefresh() {
-    this.store.dispatch(UserAction.clearUsers()); // Clear the state
+    this.store.dispatch(UserAction.clearUsers());
     this.store.dispatch(UserAction.loadUsers({ per_page: 100, since: '1' }));
   }
 }
