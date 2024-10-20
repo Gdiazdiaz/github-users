@@ -12,10 +12,9 @@ import { reducers } from './store/reducers.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/user/user.effects';
 import { SearchEffects } from './store/search/search.effects';
-import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, StoreModule.forRoot(reducers), EffectsModule.forRoot([UserEffects, SearchEffects])],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

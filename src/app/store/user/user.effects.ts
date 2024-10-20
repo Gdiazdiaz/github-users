@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import * as UserActions from './user.actions';
@@ -43,6 +43,7 @@ export class UserEffects {
     return 0;
   }
 
+
   loadUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.loadUser),
@@ -55,4 +56,3 @@ export class UserEffects {
     )
   );
 }
-

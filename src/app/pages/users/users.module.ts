@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -17,6 +17,6 @@ import { userReducer } from 'src/app/store/user/user.reducer';
     IonicModule,
     UsersPageRoutingModule, StoreModule.forFeature('users', userReducer),
   ],
-  declarations: [UsersPage]
+  declarations: [UsersPage],
 })
 export class UsersPageModule {}

@@ -30,8 +30,8 @@
           <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="avatar" />
         </ion-avatar>
         <div ngClass="flex flex-col gap-1 items-center">
-        <p ngClass="text-lg">{{user?.name ?? 'Full Name'}}</p>
-        <p ngClass="text-sm opacity-50">&#64;{{user?.login ?? 'username'}}</p>
+        <ion-text [ngStyle]="user?.public_repos ?? 0 > 2 ? { color: 'red' } : {  }" ngClass="text-lg">{{user?.name ?? 'Full Name'}}</ion-text>
+        <ion-text ngClass="text-sm opacity-50">&#64;{{user?.login ?? 'username'}}</ion-text>
       </div>
       </section>
       <section ngClass="mt-10 bg-black p-5">
@@ -56,8 +56,15 @@
             <ion-label>Following</ion-label>
           </ion-item>
           <ion-item>
+            <ion-badge color="danger" slot="end">{{user?.public_repos ?? 0 | number}}</ion-badge>
+            <ion-label>Public repositories</ion-label>
+          </ion-item>
+          <ion-item>
             <ion-label [color]="user?.blog ? 'secondary' : ''" slot="end">{{user?.blog ?? 'N/A'}}</ion-label>
             <ion-label>Blog/Website</ion-label>
+          </ion-item>
+          <ion-item *ngIf="user && user?.blog">
+            <button ngClass="bg-purple-700 w-full text-center h-full rounded-md" (click)="openWebsite({url: user.blog })">Visit Website</button>
           </ion-item>
         </ion-list>
       </section>

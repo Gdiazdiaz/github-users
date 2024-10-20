@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter, Observable } from 'rxjs';
@@ -6,6 +6,7 @@ import { User, UserByUsername, UserState } from 'src/app/interfaces/user';
 import * as UserActions from '../../store/user/user.actions';
 import * as SearchActions from '../../store/search/search.actions';
 import { SearchResult, SearchState } from 'src/app/interfaces/search';
+import { InAppBrowser, OpenInDefaultParameterModel } from '@capacitor/inappbrowser';
 
 @Component({
   selector: 'app-user',
@@ -15,7 +16,7 @@ import { SearchResult, SearchState } from 'src/app/interfaces/search';
 export class UserPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private store: Store<{ users: UserState; search: SearchState }>
+    private store: Store<{ users: UserState; search: SearchState }>,
   ) {}
 
   user$: Observable<User | null> = this.store.select(
@@ -68,5 +69,9 @@ export class UserPage implements OnInit {
   clearSearch(){
     this.openSearcher = false;
     this.store.dispatch(SearchActions.clearSearch());
+  }
+
+  async openWebsite(url: OpenInDefaultParameterModel) {
+    await InAppBrowser.openInExternalBrowser(url);
   }
 }
