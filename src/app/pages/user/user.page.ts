@@ -6,6 +6,7 @@ import { User, UserByUsername, UserState } from 'src/app/interfaces/user';
 import * as UserActions from '../../store/user/user.actions';
 import * as SearchActions from '../../store/search/search.actions';
 import { SearchResult, SearchState } from 'src/app/interfaces/search';
+import { InAppBrowser, OpenInDefaultParameterModel } from '@capacitor/inappbrowser';
 
 @Component({
   selector: 'app-user',
@@ -68,5 +69,9 @@ export class UserPage implements OnInit {
   clearSearch(){
     this.openSearcher = false;
     this.store.dispatch(SearchActions.clearSearch());
+  }
+
+  async openWebsite(url: OpenInDefaultParameterModel) {
+    await InAppBrowser.openInExternalBrowser(url);
   }
 }

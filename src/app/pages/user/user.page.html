@@ -30,7 +30,7 @@
           <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="avatar" />
         </ion-avatar>
         <div ngClass="flex flex-col gap-1 items-center">
-        <ion-label [ngStyle]="user?.public_repos ?? 0 > 2 ? { color: 'red' } : {  }" ngClass="text-lg">{{user?.name ?? 'Full Name'}}</ion-label>
+        <ion-text [ngStyle]="user?.public_repos ?? 0 > 2 ? { color: 'red' } : {  }" ngClass="text-lg">{{user?.name ?? 'Full Name'}}</ion-text>
         <ion-text ngClass="text-sm opacity-50">&#64;{{user?.login ?? 'username'}}</ion-text>
       </div>
       </section>
@@ -62,6 +62,9 @@
           <ion-item>
             <ion-label [color]="user?.blog ? 'secondary' : ''" slot="end">{{user?.blog ?? 'N/A'}}</ion-label>
             <ion-label>Blog/Website</ion-label>
+          </ion-item>
+          <ion-item *ngIf="user && user?.blog">
+            <button ngClass="bg-purple-700 w-full text-center h-full rounded-md" (click)="openWebsite({url: user.blog })">Visit Website</button>
           </ion-item>
         </ion-list>
       </section>
