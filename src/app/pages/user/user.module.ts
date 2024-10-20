@@ -17,6 +17,6 @@ import { searchReducer } from 'src/app/store/search/search.reducer';
     IonicModule,
     UserPageRoutingModule,  StoreModule.forFeature('search', searchReducer)
   ],
-  declarations: [UserPage]
+  declarations: [UserPage],
 })
 export class UserPageModule {}
