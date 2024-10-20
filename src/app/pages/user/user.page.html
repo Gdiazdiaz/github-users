@@ -1,0 +1,64 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="cleanLogin()" default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-searchbar
+      color="translucent"
+      [(ngModel)]="searchTerm"
+      placeholder="Search by username"
+      debounce="500"
+      (ionInput)="onSearch($event)">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-list ngClass="fixed top-0 w-full mt-10" *ngIf="searchResults$ | async as searchResults">
+    <ion-item *ngFor="let result of searchResults.items" (click)="clearSearch()" [routerLink]="['/tabs/user', result?.login]">
+      <ion-label class="text-sm">{{ result.login }}</ion-label>
+    </ion-item>
+    <ion-item *ngIf="openSearcher && searchResults.total_count === 0">
+      <ion-label>0 results found</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-spinner *ngIf="loading$ | async" name="crescent" class="ion-padding"></ion-spinner>
+<section ngClass="flex flex-col items-center gap-3 pt-5">
+        <ion-avatar style="height: 150px; width: 150px;" *ngIf="user">
+          <img [src]="user.avatar_url" alt="avatar" />
+        </ion-avatar>
+        <ion-avatar style="height: 150px; width: 150px;" *ngIf="!user">
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="avatar" />
+        </ion-avatar>
+        <div ngClass="flex flex-col gap-1 items-center">
+        <p ngClass="text-lg">{{user?.name ?? 'Full Name'}}</p>
+        <p ngClass="text-sm opacity-50">&#64;{{user?.login ?? 'username'}}</p>
+      </div>
+      </section>
+      <section ngClass="mt-10 bg-black p-5">
+        <p>{{user?.bio ?? 'No bio'}}</p>
+      </section>
+      <section>
+        <ion-list>
+          <ion-item>
+            <ion-label [color]="user?.company ? 'primary' : ''" slot="end">{{user?.company ?? 'N/A'}}</ion-label>
+            <ion-label>Company</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label [color]="user?.location ? 'success' : ''"  slot="end">{{user?.location ?? 'N/A'}}</ion-label>
+            <ion-label>Location</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-badge color="warning" slot="end">{{user?.followers ?? 0 | number }}</ion-badge>
+            <ion-label>Followers</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-badge color="tertiary" slot="end">{{user?.following ?? 0 | number}}</ion-badge>
+            <ion-label>Following</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label [color]="user?.blog ? 'secondary' : ''" slot="end">{{user?.blog ?? 'N/A'}}</ion-label>
+            <ion-label>Blog/Website</ion-label>
+          </ion-item>
+        </ion-list>
+      </section>
+</ion-content>

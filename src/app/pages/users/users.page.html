@@ -1,0 +1,22 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-icon ngClass="ml-4" size="large" slot="start" name="logo-github"></ion-icon>
+    <ion-title>Github Users App</ion-title>
+    <ion-button ngClass="mr-4" shape="round" color="translucent" slot="end" (click)="onRefresh()"><ion-icon color="primary" slot="icon-only" name="refresh"></ion-icon></ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let user of users$ | async; let index = index" [routerLink]="['/tabs/user', user?.login]">
+      <ion-avatar slot="start">
+        <img [src]="user.avatar_url" alt="avatar" />
+      </ion-avatar>
+      <ion-label>{{ user?.login }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content loading-spinner="bubbles" loading-text="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
