@@ -13,6 +13,10 @@ const routes: Routes = [
       },
       {
         path: 'user',
+        loadChildren: () => import('../../pages/user/user.module').then(m => m.UserPageModule) // Add this line for generic /tabs/user
+      },
+      {
+        path: 'user/:login',
         loadChildren: () => import('../../pages/user/user.module').then(m => m.UserPageModule)
       },
       {

@@ -42,4 +42,5 @@ export interface User {
     user: User | null,
     loading: boolean,
     error: string | null,
+    since: string,
   };
